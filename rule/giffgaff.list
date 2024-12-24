@@ -1,2 +1,4 @@
-HOST-SUFFIX,gspe1-ssl.ls.apple.com,giffgaff
-HOST-KEYWORD,giffgaff,giffgaff
+HOST-SUFFIX,gspe1-ssl.ls.apple.com,Giffgaff
+HOST-KEYWORD,giffgaff,Giffgaff
+IP-CIDR,87.194.0.0/16,Giffgaff
+IP-CIDR,82.132.0.0/16,Giffgaff
