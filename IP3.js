@@ -5,7 +5,7 @@ if ($response.statusCode != 200) {
 var body = $response.body;
 var obj = JSON.parse(body);
 var title = obj['country'];
-var subtitle = obj['region'] + ' ' + obj['city'] + ' ' + obj['isp'];
+var subtitle = obj['regionName'] + ' ' + obj['city'] + ' ' + obj['isp'];
 var ip = obj['query'];
 var description = "国家" + ":" + obj['country'] + '\n' + 
                   "洲" + ":" + obj['regionName'] + '\n' + 
