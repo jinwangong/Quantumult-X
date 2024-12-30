@@ -7,12 +7,17 @@ var obj = JSON.parse(body);
 
 // 检测字符串中是否包含中文
 function hasChinese(str) {
+    if (!str) return false;
     return /[\u4e00-\u9fa5]/.test(str);
 }
 
-// 获取国家对应的 Emoji 国旗
+// 获取国家对应的 Emoji 国旗，台湾特殊处理
 function getFlagEmoji(countryCode) {
     if (!countryCode) return ""; 
+    // 如果是台湾，返回中国国旗
+    if (countryCode.toUpperCase() === 'TW') {
+        return "🇨🇳";
+    }
     return countryCode.toUpperCase().replace(/./g, char => 
         String.fromCodePoint(127397 + char.charCodeAt())
     );
@@ -33,17 +38,22 @@ var ip = obj['query'];
 var flag = getFlagEmoji(countryCode);
 var titleParts = [flag];
 
-// 添加国家
-if (country) titleParts.push(country);
-
-// 添加地区（如果与国家不同）
-if (regionName && regionName !== country) {
+// 只添加包含中文的部分
+if (hasChinese(country)) {
+    titleParts.push(country);
+}
+if (hasChinese(regionName) && regionName !== country) {
     titleParts.push(regionName);
 }
-
-// 添加城市（如果与地区和国家不同）
-if (city && city !== regionName && city !== country) {
+if (hasChinese(city) && city !== regionName && city !== country) {
     titleParts.push(city);
+}
+
+// 如果没有任何中文部分，则添加英文部分
+if (titleParts.length === 1) {  // 只有国旗
+    if (country) titleParts.push(country);
+    if (regionName && regionName !== country) titleParts.push(regionName);
+    if (city && city !== regionName && city !== country) titleParts.push(city);
 }
 
 var title = titleParts.filter(Boolean).join(" ");
