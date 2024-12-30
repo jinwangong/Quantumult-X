@@ -26,6 +26,7 @@ var city = obj['city'];
 var continent = obj['continent'];
 var isp = obj['isp'] || "未知 ISP";
 var org = obj['org'] || "未知组织";
+var ip = obj['query']; // IP 地址
 
 // 判断标题的组合逻辑
 var flag = getFlagEmoji(countryCode); // 国旗 Emoji
@@ -44,11 +45,10 @@ if (city && city !== regionName) {
 // 构建标题
 var title = titleParts.filter(Boolean).join(" ");
 
-// 构建副标题：英文洲、ISP 和 ORG
-var subtitle = [continent, isp, org].filter(Boolean).join(" · ");
+// 构建副标题：英文洲、ISP 和 IP 地址
+var subtitle = [continent, isp, ip].filter(Boolean).join(" · ");
 
 // 构建详细描述
-var ip = obj['query']; // IP 地址
 var description = [
   "国家: " + country,
   "洲: " + (regionName || "未知"),
