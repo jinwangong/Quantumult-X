@@ -38,7 +38,7 @@ if (regionName && regionName !== country) {
 }
 
 // 添加城市信息（若和洲重复则忽略）
-if (city && city !== regionName) {
+if (city && city !== regionName && city !== country) {
   titleParts.push(city);
 }
 
