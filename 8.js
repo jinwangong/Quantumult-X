@@ -30,7 +30,7 @@ var regionName = obj['regionName'];
 var city = obj['city'];
 var isp = obj['isp'] || "未知 ISP";
 var org = obj['org'] || "未知组织";
-var asn = obj['as'] || "";
+var asn = obj['asname'] || "";
 var ip = obj['query'];
 
 // 构建标题
