@@ -28,7 +28,6 @@ var country = obj['country'];
 var countryCode = obj['countryCode'];
 var regionName = obj['regionName'];
 var city = obj['city'];
-var timezone = obj['timezone'];
 var isp = obj['isp'] || "未知 ISP";
 var org = obj['org'] || "未知组织";
 var asn = obj['as'] || "";
@@ -58,10 +57,9 @@ if (titleParts.length === 1) {  // 只有国旗
 
 var title = titleParts.filter(Boolean).join(" ");
 
-// 构建副标题
-var timezone_name = timezone.split('/').pop().replace(/_/g, ' ');
+// 构建简化后的副标题：只显示 ISP 和 IP
 var isp_name = asn.split(' ')[1] || isp;
-var subtitle = [timezone_name, isp_name, ip].filter(Boolean).join(" · ");
+var subtitle = [isp_name, ip].filter(Boolean).join(" · ");
 
 // 构建描述
 var description = "-----------------------------------" + "\n\n" +
