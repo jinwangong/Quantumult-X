@@ -21,11 +21,10 @@ function getFlagEmoji(countryCode) {
 // 提取主要字段
 var country = obj['country'];
 var countryCode = obj['countryCode']; // 国家代码
-var regionName = hasChinese(obj['regionName']) ? obj['regionName'] : ""; // 仅保留有中文的 regionName
+var regionName = obj['regionName'] || ""; // 洲名称（无需检测中文）
 var city = obj['city'];
 var continent = obj['continent'];
 var isp = obj['isp'] || "未知 ISP";
-var org = obj['org'] || "未知组织";
 var ip = obj['query']; // IP 地址
 
 // 判断标题的组合逻辑
@@ -45,8 +44,8 @@ if (city && city !== regionName && city !== country) {
 // 构建标题
 var title = titleParts.filter(Boolean).join(" ");
 
-// 构建副标题：英文洲、ISP 和 IP 地址
-var subtitle = [continent, isp, ip].filter(Boolean).join(" · ");
+// 构建副标题：区域名称、ISP 和 IP 地址
+var subtitle = [regionName, isp, ip].filter(Boolean).join(" · ");
 
 // 构建详细描述
 var description = [
@@ -54,7 +53,7 @@ var description = [
   "洲: " + (regionName || "未知"),
   "城市: " + (city || "未知"),
   "ISP: " + isp,
-  "ORG: " + org
+  "ORG: " + (obj['org'] || "未知组织")
 ].join("\n");
 
 $done({title, subtitle, ip, description});
