@@ -52,7 +52,7 @@ if (titleParts.length === 1) {
 var title = titleParts.filter(Boolean).join(" ");
 var timezone_name = timezone.split('/').pop().replace(/_/g, ' ');
 var isp_name = asn.split(' ')[1] || isp;
-var subtitle = [timezone_name, isp_name, ip].filter(Boolean).join(" · ");
+var subtitle = [isp_name, ip].filter(Boolean).join(" · ");
 
 var description = "-----------------------------------" + "\n\n" +
                  "国家: " + country + "\n" +
